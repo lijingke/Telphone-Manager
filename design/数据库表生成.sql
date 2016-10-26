@@ -1,19 +1,6 @@
-﻿/*
- * ER/Studio 8.0 SQL Code Generation
- * Company :      CUIT
- * Project :      Phone.DM1
- * Author :       lijingke
- *
- * Date Created : Wednesday, October 26, 2016 13:25:36
- * Target DBMS : Microsoft SQL Server 2008
- */
-
-/* 
- * TABLE: Address_code 
- */
-
+﻿
 CREATE TABLE Address_code(
-    Code      numeric(10, 0)    NOT NULL,
+    Code      int    NOT NULL,
     A_Name    nvarchar(50)      NOT NULL,
     CONSTRAINT PK8 PRIMARY KEY NONCLUSTERED (Code)
 )
@@ -51,11 +38,11 @@ go
  */
 
 CREATE TABLE DealerInfo(
-    Dealer_ID    int               NOT NULL,
+    Dealer_ID    int          NOT NULL,
     Name         nvarchar(20)      NOT NULL,
-    Province     numeric(10, 0)    NULL,
-    City         numeric(10, 0)    NULL,
-    Tel          numeric(15, 0)    NULL,
+    Province     int    NULL,
+    City         int    NULL,
+    Tel          int    NULL,
     Address      nvarchar(50)      NULL,
     CONSTRAINT PK4 PRIMARY KEY NONCLUSTERED (Dealer_ID)
 )
@@ -74,10 +61,10 @@ go
  */
 
 CREATE TABLE UseLog(
-    Log_ID       int                    NOT NULL,
+    Log_ID       int           identity(1,1)         NOT NULL,
     Method       nvarchar(10)           NOT NULL,
     Time         datetime               NOT NULL,
-    Number       numeric(38, 0)    NULL,
+    Number       int    NULL,
     Dealer_ID    int                    NULL,
     P_Model      varchar(20)            NULL,
     CONSTRAINT PK10 PRIMARY KEY NONCLUSTERED (Log_ID)
@@ -98,7 +85,7 @@ go
 
 CREATE TABLE PhoneInfo(
     P_Model      varchar(20)       NOT NULL,
-    P_Address    numeric(20, 0)    NULL,
+    P_Address    int    NULL,
     P_Color      nvarchar(10)      NOT NULL,
     P_Deploy     nvarchar(20)      NOT NULL,
     P_Brand      nvarchar(20)      NOT NULL,
@@ -121,8 +108,8 @@ go
 CREATE TABLE Stock_Manage(
     Dealer_ID    int                      NOT NULL,
     P_Model      varchar(20)              NOT NULL,
-    Parent_ID    numeric(10, 0)           NOT NULL,
-    Inventory    numeric(38, 0)    NOT NULL,
+    Parent_ID    int           NOT NULL,
+    Inventory    int    NOT NULL,
     CONSTRAINT PK7 PRIMARY KEY NONCLUSTERED (Dealer_ID, P_Model)
 )
 go
@@ -140,7 +127,7 @@ go
  */
 
 CREATE TABLE [Users](
-    Dealer_ID      int            NOT NULL,
+    Dealer_ID      int        identity(1,1)    NOT NULL,
     Dealer_Name    varchar(20)    NOT NULL,
     Dealer_Psw     varchar(20)    NOT NULL,
     CONSTRAINT PK1 PRIMARY KEY NONCLUSTERED (Dealer_ID)
