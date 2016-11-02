@@ -130,6 +130,7 @@ CREATE TABLE [Users](
     Dealer_ID      int        identity(1,1)    NOT NULL,
     Dealer_Name    varchar(20)    NOT NULL,
     Dealer_Psw     varchar(20)    NOT NULL,
+	Parent_ID		int			Not Null,
     CONSTRAINT PK1 PRIMARY KEY NONCLUSTERED (Dealer_ID)
 )
 go
