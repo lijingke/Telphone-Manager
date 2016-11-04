@@ -36,6 +36,14 @@ public partial class SystemManagerForm_EditStockInfo : System.Web.UI.Page
         }
         if(new pdm.BLL.Stock_Manage().Update(stock))
         {
+            //添加操作日志
+            pdm.Model.UseLog log = new pdm.Model.UseLog();
+            log.Method = "edit_Stock";
+            log.Time = DateTime.Now;
+            log.Dealer_ID = Convert.ToInt32(Session["userID"].ToString());
+            log.P_Model = stock.P_Model;
+            log.Number = Convert.ToInt32(num.Text);
+            new pdm.BLL.UseLog().Add(log);
             Response.Write("<script type='text/javascript'>alert('修改成功');window.location.href='./EditStock.aspx';</script>");
         }
         else

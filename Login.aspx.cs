@@ -42,6 +42,12 @@ public partial class _Default : System.Web.UI.Page
                        
                         if (int.Parse(userDS.Tables[0].Rows[0]["Parent_ID"].ToString())==-1)
                         {
+                            //添加操作日志
+                            pdm.Model.UseLog log = new pdm.Model.UseLog();
+                            log.Method = "login";
+                            log.Time = DateTime.Now;
+                            log.Dealer_ID = Convert.ToInt32(Session["userID"].ToString());                           
+                            new pdm.BLL.UseLog().Add(log);
                             Response.Write("<script type='text/javascript'>alert('登陆成功');window.location.href='./SystemManagerForm/index.aspx';</script>");
                         }
                         else

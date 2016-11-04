@@ -85,7 +85,18 @@ public partial class SystemManagerForm_Delivery : System.Web.UI.Page
 
 
                         if (new pdm.BLL.Stock_Manage().Update(del)&&(new pdm.BLL.Stock_Manage().Update(sys)))
+                        {
+                            //添加操作日志
+                            pdm.Model.UseLog log = new pdm.Model.UseLog();
+                            log.Method = "delivery";
+                            log.Time = DateTime.Now;
+                            log.Dealer_ID = Convert.ToInt32(Session["userID"].ToString());
+                            log.P_Model = del.P_Model;
+                            log.Number = Convert.ToInt32(num.Text);
+                            new pdm.BLL.UseLog().Add(log);
                             Response.Write("<script type='text/javascript'>alert('发货成功')</script>");
+                        }
+                            
                         else
                             Response.Write("<script type='text/javascript'>alert('发货失败')</script>");
 
@@ -102,7 +113,17 @@ public partial class SystemManagerForm_Delivery : System.Web.UI.Page
                         pdm.Model.Stock_Manage sys = new pdm.BLL.Stock_Manage().GetModel(Convert.ToInt32(Session["UserID"].ToString()), model.SelectedValue);
                         sys.Inventory = sys.Inventory- Convert.ToInt32(num.Text);
                         if (new pdm.BLL.Stock_Manage().Add(del) && (new pdm.BLL.Stock_Manage().Update(sys))) 
-                        { Response.Write("<script type='text/javascript'>alert('发货成功')</script>"); }
+                        {
+                            //添加操作日志
+                            pdm.Model.UseLog log = new pdm.Model.UseLog();
+                            log.Method = "delivery";
+                            log.Time = DateTime.Now;
+                            log.Dealer_ID = Convert.ToInt32(Session["userID"].ToString());
+                            log.P_Model = del.P_Model;
+                            log.Number = del.Inventory;
+                            new pdm.BLL.UseLog().Add(log);
+                            Response.Write("<script type='text/javascript'>alert('发货成功')</script>");
+                        }
                         else
                            { Response.Write("<script type='text/javascript'>alert('发货失败')</script>"); }
                     } 

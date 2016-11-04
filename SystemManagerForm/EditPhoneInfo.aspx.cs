@@ -41,6 +41,15 @@ public partial class SystemManagerForm_EditPhoneInfo : System.Web.UI.Page
             {
                 if((new pdm.BLL.PhoneInfo().Update(phone)))
                 {
+                    //添加操作日志
+                    pdm.Model.UseLog log = new pdm.Model.UseLog();
+                    log.Method = "edit_phone_info";
+                    log.Time = DateTime.Now;
+                    log.Dealer_ID = Convert.ToInt32(Session["userID"].ToString());
+                    log.P_Model = phone.P_Model;
+                    
+                    new pdm.BLL.UseLog().Add(log);
+
                     Response.Write("<script type='text/javascript'>alert('更新成功')</script>");
                 }
                 else

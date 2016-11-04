@@ -26,6 +26,14 @@ public partial class SystemManagerForm_add_PhoneInfo : System.Web.UI.Page
                 phone.P_Brand = brand.Text;
                 if (new pdm.BLL.PhoneInfo().Add(phone))
                 {
+                    //添加操作记录
+                    pdm.Model.UseLog log = new pdm.Model.UseLog();
+                    log.Method = "add_phone_model";
+                    log.Time = DateTime.Now;
+                    log.Dealer_ID = Convert.ToInt32(Session["userID"].ToString());
+                    log.P_Model = phone.P_Model;
+                    new pdm.BLL.UseLog().Add(log);
+
                     Response.Write("<script type='text/javascript'>alert('添加成功')</script>");
                 }
                 else

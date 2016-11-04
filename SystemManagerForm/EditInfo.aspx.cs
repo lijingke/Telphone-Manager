@@ -119,6 +119,14 @@ public partial class SystemManagerForm_EditInfo : System.Web.UI.Page
         di.Tel = Convert.ToInt32(telephone_number.Text);
         di.Address = addr.Text;
         new pdm.BLL.DealerInfo().Update(di);
+
+        //添加操作日志
+        pdm.Model.UseLog log = new pdm.Model.UseLog();
+        log.Method = "edit_user_info";
+        log.Time = DateTime.Now;
+        log.Dealer_ID = Convert.ToInt32(Session["userID"].ToString());
+        new pdm.BLL.UseLog().Add(log);
+
         Response.Write("<script type='text/javascript'>alert('修改成功')</script>");
 
     }

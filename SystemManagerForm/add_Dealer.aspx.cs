@@ -103,7 +103,13 @@ public partial class Form_add_Dealer : System.Web.UI.Page
                     Province.SelectedIndex = 0;
                     City.Visible = false;
                     County.Visible = false;
-
+                    
+                    //添加日志记录
+                    pdm.Model.UseLog log = new pdm.Model.UseLog();
+                    log.Method = "add_user";
+                    log.Time = DateTime.Now;
+                    log.Dealer_ID =Convert.ToInt32( Session["userID"].ToString());
+                    new pdm.BLL.UseLog().Add(log);
 
                 }
                 catch

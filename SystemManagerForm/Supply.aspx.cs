@@ -52,15 +52,34 @@ public partial class SystemManagerForm_Supply : System.Web.UI.Page
             {
                 int i = new pdm.BLL.Stock_Manage().GetModel(dealer_id, model.SelectedValue).Inventory;
                 stock.Inventory += i;
-                if(new pdm.BLL.Stock_Manage().Update(stock))
-                    Response.Write("<script type='text/javascript'>alert('进货成功');</script>");
+                if (new pdm.BLL.Stock_Manage().Update(stock))
+                {
+                    //添加操作日志
+                    pdm.Model.UseLog log = new pdm.Model.UseLog();
+                    log.Method = "supply";
+                    log.Time = DateTime.Now;
+                    log.Dealer_ID = Convert.ToInt32(Session["userID"].ToString());
+                    log.P_Model = stock.P_Model;
+                    log.Number = Convert.ToInt32(num.Text);
+                    new pdm.BLL.UseLog().Add(log);
+
+                    Response.Write("<script type='text/javascript'>alert('进货成功');</script>"); }
                 else
                     Response.Write("<script type='text/javascript'>alert('进货失败');</script>");
             }
             else
             {
                 if (new pdm.BLL.Stock_Manage().Add(stock))
-                    Response.Write("<script type='text/javascript'>alert('进货成功');</script>");
+                {
+                    //添加操作日志
+                    pdm.Model.UseLog log = new pdm.Model.UseLog();
+                    log.Method = "supply";
+                    log.Time = DateTime.Now;
+                    log.Dealer_ID = Convert.ToInt32(Session["userID"].ToString());
+                    log.P_Model =stock.P_Model;
+                    log.Number = Convert.ToInt32(num.Text);
+                    new pdm.BLL.UseLog().Add(log);
+                    Response.Write("<script type='text/javascript'>alert('进货成功');</script>"); }
                 else
                     Response.Write("<script type='text/javascript'>alert('进货失败');</script>");
             }
