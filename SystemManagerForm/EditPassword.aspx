@@ -13,16 +13,20 @@
     <form id="form1" runat="server">
     <div class="container">
      <div class="offset1">
+     <div>
+        <asp:Label  runat="server" class="span2 ">原密码</asp:Label>
+        <asp:TextBox runat="server" ID="oldpassword" type="password"  class="input-large span4"></asp:TextBox>
+    </div>
     <div>
         <asp:Label  runat="server" class="span2 ">修改密码</asp:Label>
-        <asp:TextBox runat="server" ID="psw" type="text" Enabled="false" class="input-large span4"></asp:TextBox>
+        <asp:TextBox runat="server" ID="psw" type="password" class="input-large span4"></asp:TextBox>
     </div>
 
 
 
          <div>
         <asp:Label  runat="server" class="span2" >确认密码</asp:Label>
-        <asp:TextBox runat="server" ID="confirm"  type="text" class="input-large span4"></asp:TextBox>
+        <asp:TextBox runat="server" ID="confirm"  type="password" class="input-large span4"></asp:TextBox>
     </div>
       <div>
             <asp:Button ID="sub" class="btn btn-large offset2" runat="server" Text="提交" OnClick="sub_Click" />

@@ -34,7 +34,7 @@
                             <li><a href="ViewNextLevelDealers.aspx" target="right"><i class="icon-star"></i>查看下级用户账号</a></li>
                            <!--<li><a href="EditInfo.aspx" target="right"><i class=" icon-pencil"></i>修改我的信息</a></li>-->
                             <li><a href="add_Dealer.aspx" target="right"><i class="icon-plus"></i>添加下级经销商</a></li>
-                            <li><a href="#" target="right"><i class="icon-edit"></i>修改我的密码</a></li>
+                            <li><a href="EditPassword.aspx" target="right"><i class="icon-edit"></i>修改我的密码</a></li>
                             <li><a href="Log.aspx/?method=user" target="right"><i class=" icon-eye-open"></i>日志查看</a></li>
                         </ul>
                     </li>
