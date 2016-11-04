@@ -9,6 +9,6 @@
    
 </head>
 <body>
-标题
+    <asp:Image ID="Image1" runat="server"  ImageUrl="~/images/Logo.png" Height="90px" Width="1366px"/>
 </body>
 </html>

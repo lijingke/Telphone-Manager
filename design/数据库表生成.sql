@@ -14,24 +14,8 @@ ELSE
     PRINT '<<< FAILED CREATING TABLE Address_code >>>'
 go
 
-/* 
- * TABLE: Dealer_Level 
- */
-
-CREATE TABLE Dealer_Level(
-    Dealer_ID    int    NOT NULL,
-    Level        int    NOT NULL,
-    CONSTRAINT PK5 PRIMARY KEY NONCLUSTERED (Dealer_ID)
-)
-go
 
 
-
-IF OBJECT_ID('Dealer_Level') IS NOT NULL
-    PRINT '<<< CREATED TABLE Dealer_Level >>>'
-ELSE
-    PRINT '<<< FAILED CREATING TABLE Dealer_Level >>>'
-go
 
 /* 
  * TABLE: DealerInfo 
@@ -42,6 +26,7 @@ CREATE TABLE DealerInfo(
     Name         nvarchar(20)      NOT NULL,
     Province     int    NULL,
     City         int    NULL,
+	County       int    NULL,
     Tel          int    NULL,
     Address      nvarchar(50)      NULL,
     CONSTRAINT PK4 PRIMARY KEY NONCLUSTERED (Dealer_ID)
@@ -108,7 +93,7 @@ go
 CREATE TABLE Stock_Manage(
     Dealer_ID    int                      NOT NULL,
     P_Model      varchar(20)              NOT NULL,
-    Parent_ID    int           NOT NULL,
+    Parent_ID    int            NULL,
     Inventory    int    NOT NULL,
     CONSTRAINT PK7 PRIMARY KEY NONCLUSTERED (Dealer_ID, P_Model)
 )
@@ -131,7 +116,8 @@ CREATE TABLE [Users](
     Dealer_Name    varchar(20)    NOT NULL,
     Dealer_Psw     varchar(20)    NOT NULL,
 	Parent_ID		int			Not Null,
-    CONSTRAINT PK1 PRIMARY KEY NONCLUSTERED (Dealer_ID)
+	Dealer_Level    int         Not NUll,
+    CONSTRAINT PK1 PRIMARY KEY NONCLUSTERED (Dealer_Name)
 )
 go
 
@@ -147,10 +133,6 @@ go
  * TABLE: Dealer_Level 
  */
 
-ALTER TABLE Dealer_Level ADD CONSTRAINT [RefUsers6] 
-    FOREIGN KEY (Dealer_ID)
-    REFERENCES [Users](Dealer_ID)
-go
 
 
 /* 

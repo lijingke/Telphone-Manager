@@ -21,28 +21,32 @@ public partial class _Default : System.Web.UI.Page
         {
             try
             {
+                //根据输入框中的用户名来取出一个Dataset，搜索语句采用传参的方式
                 DataSet userDS = new DataSet();
                 string sql = "select * from Users where Dealer_Name = @name";
                 pdm.BLL.DealerInfo dealer = new pdm.BLL.DealerInfo();
                 System.Data.SqlClient.SqlParameter us = new System.Data.SqlClient.SqlParameter("@name", username.Text.Trim());
                 userDS = Maticsoft.DBUtility.DbHelperSQL.Query(sql, us);
-
-
+                
+                //判断是否密码是否正确
                 if (userDS.Tables[0].Rows.Count > 0)
                 {
 
                     if (userDS.Tables[0].Rows[0]["Dealer_Psw"].ToString() == password.Text.Trim())
                     {
                        
-                        Session["UserID"] = dealer.GetModel(int.Parse(userDS.Tables[0].Rows[0]["Dealer_ID"].ToString()));
-                        Session["Parent"] = dealer.GetModel(int.Parse(userDS.Tables[0].Rows[0]["Parent_ID"].ToString()));
-                        if(int.Parse(userDS.Tables[0].Rows[0]["Parent_ID"].ToString())==-1)
+                        Session["UserID"] = userDS.Tables[0].Rows[0]["Dealer_ID"].ToString();
+                        Session["UserName"] = userDS.Tables[0].Rows[0]["Dealer_Name"].ToString();
+                        Session["UserLevel"] = userDS.Tables[0].Rows[0]["Dealer_Level"].ToString();
+                        Session["Parent"] = userDS.Tables[0].Rows[0]["Parent_ID"].ToString();
+                       
+                        if (int.Parse(userDS.Tables[0].Rows[0]["Parent_ID"].ToString())==-1)
                         {
-                            Response.Write("<script type='text/javascript'>alert('登陆成功');window.location.href='./SystemManagerForm/index.aspx'</script>");
+                            Response.Write("<script type='text/javascript'>alert('登陆成功');window.location.href='./SystemManagerForm/index.aspx';</script>");
                         }
                         else
                         {
-                            Response.Write("<script type='text/javascript'>alert('登陆成功');window.location.href='./SystemManagerForm/index.aspx'</script>");
+                            Response.Write("<script type='text/javascript'>alert('登陆成功');window.location.href='#'</script>");
                         }
                         
                     }
