@@ -15,7 +15,6 @@ public partial class SystemManagerForm_Delivery : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-
            
                 if (Session.Count > 0 && Session["userID"].ToString() != "")
                 { }
@@ -38,8 +37,9 @@ public partial class SystemManagerForm_Delivery : System.Web.UI.Page
 
             //生成手机型号下拉菜单选项
             DataSet modDS = new DataSet();
-            string sql = "select * from PhoneInfo";
-            modDS = Maticsoft.DBUtility.DbHelperSQL.Query(sql);
+            string sql = "select Stock_Manage.P_Model,P_Brand from PhoneInfo,Stock_Manage where Stock_Manage.P_Model=PhoneInfo.P_Model and Stock_Manage.Dealer_ID=@dealer_id";
+            System.Data.SqlClient.SqlParameter md = new System.Data.SqlClient.SqlParameter("@dealer_id",Session["userID"].ToString());
+            modDS = Maticsoft.DBUtility.DbHelperSQL.Query(sql,md);
             int num = 0;
 
             if ((num = modDS.Tables[0].Rows.Count) > 0)

@@ -11,6 +11,14 @@ public partial class SystemManagerForm_DeletePhoneInfo : System.Web.UI.Page
     {
         if(!IsPostBack)
         {
+          
+                if (Session.Count > 0 && Session["userID"].ToString() != "")
+                { }
+                else
+                {
+                    Response.Redirect("/loginout.aspx?method=sb");
+                }
+            
             string model = Request.QueryString["id"];
             Response.Write("<Script Language='JavaScript'>if ( window.confirm('确认删除？')) {  window.location.href='./Dealling.aspx?method=deletePhoneInfo&id=" + model + "' } else {window.location.href='./DisplayAllPhoneInfo.aspx' }</script>");
         }

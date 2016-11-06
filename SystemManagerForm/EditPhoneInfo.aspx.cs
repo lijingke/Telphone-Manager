@@ -11,6 +11,14 @@ public partial class SystemManagerForm_EditPhoneInfo : System.Web.UI.Page
     {
         if(!IsPostBack)
         {
+           
+                if (Session.Count > 0 && Session["userID"].ToString() != "")
+                { }
+                else
+                {
+                    Response.Redirect("/loginout.aspx?method=sb");
+                }
+            
             string mod = Request.QueryString["id"];
             Session["phone"] = mod;
             pdm.Model.PhoneInfo phone = new pdm.BLL.PhoneInfo().GetModel(mod);

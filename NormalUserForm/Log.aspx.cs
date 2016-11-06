@@ -26,7 +26,7 @@ public partial class SystemManagerForm_Log : System.Web.UI.Page
                 
                     string html = "<div class='container'><div class='span10'><table class='table table-bordered'><thead><tr><th class='span3'>操作</th><th class='span3'>时间</th></tr></thead>";
                     DataSet userDS = new DataSet();
-                    string sql = "select * from UseLog where (Method='add_user' or Method='delete_user' or Method='edit_user_info') and Dealer_ID=@dealer_id";
+                    string sql = "select * from UseLog where (Method='add_user' or Method='delete_user' or Method='edit_user_info'or Method='edit_my_info') and Dealer_ID=@dealer_id";
                     System.Data.SqlClient.SqlParameter us = new System.Data.SqlClient.SqlParameter("@dealer_id", Session["UserID"]);
                     userDS = Maticsoft.DBUtility.DbHelperSQL.Query(sql, us);
                     int num = 0;
@@ -65,7 +65,7 @@ public partial class SystemManagerForm_Log : System.Web.UI.Page
             case "stock"://库存管理日志
                 string ht = "<div class='container'><div class='span10'><table class='table table-bordered'><thead><tr><th class='span2'>操作</th><th class='span2'>手机型号</th><th class='span1'>数量</th><th class='span3'>时间</th></tr></thead>";
                 DataSet stockDS = new DataSet();
-                string sqlstock = "select * from UseLog where (Method='delivery' or Method='supply' ) and Dealer_ID=@dealer_id";
+                string sqlstock = "select * from UseLog where (Method='delivery' or Method='supply'or Method='return' ) and Dealer_ID=@dealer_id";
                 System.Data.SqlClient.SqlParameter st = new System.Data.SqlClient.SqlParameter("@dealer_id", Session["UserID"]);
                 userDS = Maticsoft.DBUtility.DbHelperSQL.Query(sqlstock,st);
                 int n = 0;

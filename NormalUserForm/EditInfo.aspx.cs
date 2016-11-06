@@ -23,7 +23,6 @@ public partial class SystemManagerForm_EditInfo : System.Web.UI.Page
         username.Text = Request.QueryString["uname"];
         if (!IsPostBack)
         {
-
             ListItem prov = new ListItem();
             prov = new ListItem();
             prov.Text = "--省份--";

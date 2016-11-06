@@ -13,15 +13,14 @@ public partial class SystemManagerForm_ViewNextLevelDealers : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            if (Session.Count > 0 && Session["userID"].ToString() != "")
-            { }
-            else
-            {
-                Response.Redirect("/loginout.aspx?method=sb");
-            }
-        }
-        if (!IsPostBack)
-        {
+           
+                if (Session.Count > 0 && Session["userID"].ToString() != "")
+                { }
+                else
+                {
+                    Response.Redirect("/loginout.aspx?method=sb");
+                }
+            
             string html = "";
             DataSet userDS = new DataSet();
             string sql = "select * from Users where Parent_ID = @id";

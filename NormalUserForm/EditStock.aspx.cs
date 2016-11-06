@@ -36,6 +36,10 @@ public partial class SystemManagerForm_EditStock : System.Web.UI.Page
                 }
 
             }
+            else
+            {
+                html += " <tr><td class='span1'>无</td><td class='span1'>无</td><td class='span2' rospan='2'>无</td></tr>";
+            }
             cont.InnerHtml = html;
         }
     }

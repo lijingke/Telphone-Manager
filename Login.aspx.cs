@@ -52,7 +52,7 @@ public partial class _Default : System.Web.UI.Page
                         }
                         else
                         {
-                            Response.Write("<script type='text/javascript'>alert('登陆成功');window.location.href='#'</script>");
+                            Response.Write("<script type='text/javascript'>alert('登陆成功');window.location.href='./NormalUserForm/index.aspx'</script>");
                         }
                         
                     }

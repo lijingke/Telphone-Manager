@@ -13,7 +13,7 @@ public partial class Form_add_Dealer : System.Web.UI.Page
        
         if (!IsPostBack)
         {
-            
+           
                 if (Session.Count > 0 && Session["userID"].ToString() != "")
                 { }
                 else
@@ -44,6 +44,109 @@ public partial class Form_add_Dealer : System.Web.UI.Page
                     prov.Text = ProvDS.Tables[0].Rows[i]["A_Name"].ToString();
                     Province.Items.Add(prov);
                 }
+            }
+            string level = Session["UserLevel"].ToString();
+            switch (level)
+            {
+                case "2"://省级
+                    Province.SelectedValue = new pdm.BLL.DealerInfo().GetModel(Convert.ToInt32(Session["userID"].ToString())).Province.ToString();
+                    Province.Enabled = false;
+                    City.Visible = true;
+                    County.Visible = false;
+                    City.Items.Clear();
+                    County.Items.Clear();
+                    ListItem city = new ListItem();
+                    city.Text = "--城市--";
+                    city.Value = "0";
+                    City.Items.Add(city);
+
+
+                    DataSet cityDS = new DataSet();
+                    int citycode = Convert.ToInt32(Province.SelectedValue) * 100;
+                    // Response.Write("<script type='text/javascript'>alert('" + citycode + "')</script>");
+                    string sqlcity = "select * from Address_code where Code > @ccode and  Code < (@ccode+100)";
+                    System.Data.SqlClient.SqlParameter ct = new System.Data.SqlClient.SqlParameter("@ccode", citycode);
+                    cityDS = Maticsoft.DBUtility.DbHelperSQL.Query(sqlcity, ct);
+                    num = 0;
+
+
+                    if ((num = cityDS.Tables[0].Rows.Count) > 0)
+                    {
+                        for (int i = 0; i < num; i++)
+                        {
+                            city = new ListItem();
+                            city.Value = cityDS.Tables[0].Rows[i]["Code"].ToString();
+                            city.Text = cityDS.Tables[0].Rows[i]["A_Name"].ToString();
+                            City.Items.Add(city);
+                        }
+                    }
+
+                    break;
+                case "3"://市级
+                    //省份选择：不可更改
+                    Province.SelectedValue = new pdm.BLL.DealerInfo().GetModel(Convert.ToInt32(Session["userID"].ToString())).Province.ToString();
+                    Province.Enabled = false;
+                    //市区选择：不可更改
+                    City.Visible = true;
+                    County.Visible = false;
+                    City.Items.Clear();
+                    County.Items.Clear();
+                    city = new ListItem();
+                    city.Text = "--城市--";
+                    city.Value = "0";
+                    City.Items.Add(city);
+                    sqlcity = "select * from Address_code where Code > @ccode and  Code < (@ccode+100)";
+                     citycode = Convert.ToInt32(Province.SelectedValue) * 100;
+                    System.Data.SqlClient.SqlParameter ct1 = new System.Data.SqlClient.SqlParameter("@ccode", citycode);
+                    cityDS = Maticsoft.DBUtility.DbHelperSQL.Query(sqlcity, ct1);
+                    num = 0;
+
+
+                    if ((num = cityDS.Tables[0].Rows.Count) > 0)
+                    {
+                        for (int i = 0; i < num; i++)
+                        {
+                            city = new ListItem();
+                            city.Value = cityDS.Tables[0].Rows[i]["Code"].ToString();
+                            city.Text = cityDS.Tables[0].Rows[i]["A_Name"].ToString();
+                            City.Items.Add(city);
+                        }
+                    }
+
+                    City.SelectedValue= new pdm.BLL.DealerInfo().GetModel(Convert.ToInt32(Session["userID"].ToString())).City.ToString();
+                    City.Enabled = false;
+                    //县级选择：允许更改
+                    County.Visible = true;
+                    County.Items.Clear();
+                    ListItem county = new ListItem();
+                    county.Text = "--县--";
+                    county.Value = "0";
+                    County.Items.Add(county);
+
+
+                    DataSet countyDS = new DataSet();
+                    int countycode = Convert.ToInt32(City.SelectedValue) * 100;
+                    // Response.Write("<script type='text/javascript'>alert('" + citycode + "')</script>");
+                    string countysql = "select * from Address_code where Code > @ccode and  Code < (@ccode+100)";
+                    System.Data.SqlClient.SqlParameter coun = new System.Data.SqlClient.SqlParameter("@ccode", countycode);
+                    countyDS = Maticsoft.DBUtility.DbHelperSQL.Query(countysql, coun);
+                    num = 0;
+
+
+                    if ((num = countyDS.Tables[0].Rows.Count) > 0)
+                    {
+                        for (int i = 0; i < num; i++)
+                        {
+                            county = new ListItem();
+                            county.Value = countyDS.Tables[0].Rows[i]["Code"].ToString();
+                            county.Text = countyDS.Tables[0].Rows[i]["A_Name"].ToString();
+                            County.Items.Add(county);
+                        }
+                    }
+                break;
+          case "4":
+                    Response.Write("<script type='text/javascript'>alert('您是县级经销商，不能添加下级用户');window.location.href='./main.aspx'</script>");
+                    break;
             }
         }
        

@@ -10,21 +10,20 @@ public partial class SystemManagerForm_EditStockInfo : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
-        {
+        if(!IsPostBack)
+        {//将型号显示出来
             if (Session.Count > 0 && Session["userID"].ToString() != "")
-            { }
-            else
-            {
-                Response.Redirect("/loginout.aspx?method=sb");
-            }
-        }
-        if (!IsPostBack)
-        {//将型号显示出来 
+                { }
+                else
+                {
+                    Response.Redirect("/loginout.aspx?method=sb");
+                }
+             
             Session["tempid"] = Request.QueryString["id"];
             Session["tempmodel"] = Request.QueryString["model"];
             model.Text = new pdm.BLL.PhoneInfo().GetModel(Session["tempmodel"].ToString()).P_Brand+ Session["tempmodel"].ToString();
-
+           
+               
 
         }
 

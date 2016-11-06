@@ -12,15 +12,14 @@ public partial class SystemManagerForm_Supply : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            if (Session.Count > 0 && Session["userID"].ToString() != "")
-            { }
-            else
-            {
-                Response.Redirect("/loginout.aspx?method=sb");
-            }
-        }
-        if (!IsPostBack)
-        {
+            
+                if (Session.Count > 0 && Session["userID"].ToString() != "")
+                { }
+                else
+                {
+                    Response.Redirect("/loginout.aspx?method=sb");
+                }
+            
             ListItem mod = new ListItem();
             mod = new ListItem();
             mod.Text = "--型号--";

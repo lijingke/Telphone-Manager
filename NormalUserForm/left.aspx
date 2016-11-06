@@ -9,6 +9,7 @@
     <script src="../assets/jquery/jquery-3.1.1.min.js"></script>
    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="../assets/css/nav.css" rel="stylesheet" />
+    <link href="../assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <script src="../assets/js/bootstrap.js"></script>
 </head>
 <body>
@@ -32,7 +33,7 @@
                         </a>
                         <ul id="UserSetting" class="nav nav-list collapse secondmenu " style="height: 0px;">
                             <li><a href="ViewNextLevelDealers.aspx" target="right"><i class="icon-star"></i>查看下级用户账号</a></li>
-                           <!--<li><a href="EditInfo.aspx" target="right"><i class=" icon-pencil"></i>修改我的信息</a></li>-->
+                            <li><a href="EditMyInfo.aspx" target="right"><i class=" icon-pencil"></i>修改我的信息</a></li>
                             <li><a href="add_Dealer.aspx" target="right"><i class="icon-plus"></i>添加下级经销商</a></li>
                             <li><a href="EditPassword.aspx" target="right"><i class="icon-edit"></i>修改我的密码</a></li>
                             <li><a href="Log.aspx/?method=user" target="right"><i class=" icon-eye-open"></i>日志查看</a></li>
@@ -48,9 +49,8 @@
                         </a>
 
                         <ul id="PhoneInfo" class="nav nav-list collapse secondmenu " style="height: 0px;">
-                            <li><a href="./DisplayAllPhoneInfo.aspx" target="right"><i class="icon-star"></i>所有手机信息</a></li>
-                            <li><a href="add_PhoneInfo.aspx" target="right"><i class=" icon-plus"></i>添加新的手机型号</a></li>
-                            <li><a href="Log.aspx/?method=phone" target="right"><i class=" icon-eye-open"></i>日志查看</a></li>
+                            <li><a href="./DisplayAllPhoneInfo.aspx" target="right"><i class="icon-star"></i>查看所有手机信息</a></li>
+                            
                         </ul>
                     </li>
  
@@ -62,7 +62,7 @@
                         </a>
                         <ul id="StockManage" class="nav nav-list collapse secondmenu " style="height: 0px;">
                             <li><a href="Delivery.aspx" target="right"><i class=" icon-random"></i>向下级发货</a></li>
-                            <li><a href="Supply.aspx" target="right"><i class=" icon-shopping-cart"></i>进货</a></li>
+                            <li><a href="return.aspx" target="right"><i class=" icon-shopping-cart"></i>向上级退货</a></li>
                             <li><a href="EditStock.aspx" target="right"><i class=" icon-pencil"></i>库存信息</a></li>
                             <li><a href="Log.aspx/?method=stock" target="right"><i class=" icon-eye-open"></i>日志查看</a></li>
                         </ul>
