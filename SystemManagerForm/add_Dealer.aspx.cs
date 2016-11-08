@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*----------------------------------------------------------------
+// 文件名：add_Dealer.aspx.cs
+// 文件功能描述：添加下级用户
+//
+//
+// 创建标识：
+//
+// 修改标识：
+// 修改描述：
+//
+// 修改标识：
+// 修改描述：
+//----------------------------------------------------------------*/
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +21,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using pdm;
 using System.Data;
+
 public partial class Form_add_Dealer : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
